@@ -80,9 +80,7 @@ const tupple: [string, number, number, string] = ["chandan", 3, 4, "chandan"];
 
 const tuppleNum: [string, number, ...number[]] = ["3", 3, 3, 3, 4, 4, 5]; // this rest tupples in here
 
-
 //Generic Types
-
 
 function sayTupple<T>(value: T[]): T | undefined {
   return value[0];
@@ -94,11 +92,27 @@ const sayTupple2 = <T>(value: T[]): T | undefined => {
   return value[0];
 };
 
-console.log(sayTupple2<number>([3, 2, 3])); 
-
+console.log(sayTupple2<number>([3, 2, 3]));
 // Here I am mentioning the value that the function should accept
 // also return the same value this are helpfull for reusable component in react js
 
 
 
+
+
+// here I am making a type from which we are using partial as generics 
+// so what will happen when we will call that function that function requires any of those water/coffe
+// from that makeCoffe type benifits of using partial
+type makeCoffe = {
+  water: string;
+  coffe: string;
+};
+
+
+const mochaCofee = (update: Partial<makeCoffe>) => {
+  return update;
+};
+
+console.log(mochaCofee({ water: "32ml" }));
+console.log(mochaCofee({ coffe: "32ml", water: "40ml" }));
 

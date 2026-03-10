@@ -40,6 +40,7 @@ const arrNum = [3, 3, 2, 0, 4, 5];
 const arrNum2 = [3, 2, 3, 4, 5];
 const tupple = ["chandan", 3, 4, "chandan"];
 const tuppleNum = ["3", 3, 3, 3, 4, 4, 5]; // this rest tupples in here
+//Generic Types
 function sayTupple(value) {
     return value[0];
 }
@@ -48,4 +49,9 @@ const sayTupple2 = (value) => {
     return value[0];
 };
 console.log(sayTupple2([3, 2, 3]));
+const mochaCofee = (update) => {
+    return update;
+};
+console.log(mochaCofee({ water: "32ml" }));
+console.log(mochaCofee({ coffe: "32ml", water: "40ml" }));
 //# sourceMappingURL=class_interfaces.js.map
