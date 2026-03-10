@@ -8,7 +8,7 @@
   "main": "index.js",
   "scripts": {
     "start": "npx tsc && node dist/class_interfaces.js",
-    "dev": "node dist/index.js"
+    "dev": "node dist/class_interfaces.js"
   },
   "devDependencies": {
     "typescript": "^5.9.3"
