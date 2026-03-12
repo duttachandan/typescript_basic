@@ -1,5 +1,3 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 class lemonTea {
     tea = 4;
     water = 3;
@@ -40,6 +38,17 @@ const arrNum = [3, 3, 2, 0, 4, 5];
 const arrNum2 = [3, 2, 3, 4, 5];
 const tupple = ["chandan", 3, 4, "chandan"];
 const tuppleNum = ["3", 3, 3, 3, 4, 4, 5]; // this rest tupples in here
+var chaiOrCode;
+(function (chaiOrCode) {
+    chaiOrCode[chaiOrCode["SMALL"] = 101] = "SMALL";
+    chaiOrCode[chaiOrCode["LARGE"] = 102] = "LARGE";
+    chaiOrCode[chaiOrCode["EXTRALARGE"] = 103] = "EXTRALARGE";
+})(chaiOrCode || (chaiOrCode = {}));
+// enum is basically stricting the user, here by declaring a enum I have simply said if you'd want to use this enum
+// then you will have to select between this values only
+// values are put in Capital Letter as this is the best practice
+const cupSize = chaiOrCode.EXTRALARGE;
+console.log(cupSize);
 //Generic Types
 function sayTupple(value) {
     return value[0];
@@ -54,4 +63,20 @@ const mochaCofee = (update) => {
 };
 console.log(mochaCofee({ water: "32ml" }));
 console.log(mochaCofee({ coffe: "32ml", water: "40ml" }));
+const CofeeMacroni = (update) => {
+    return update;
+};
+console.log(CofeeMacroni({ coffee: "32gm", water: "100ml", sugar: 20 }));
+// so here I am picking from anther type coffeBasic and also I have mentioned which properties we wants to pick in here
+const makeNewCoffee = (value) => {
+    return value;
+};
+console.log(makeNewCoffee({ coffee: "40gm", water: "300ml" }));
+// here I have said we are not going use water and coffee from coffeBasic so the coffeOld takes only one value
+// which is sugar
+const makeOldCoffee = (value) => {
+    return value;
+};
+console.log(makeOldCoffee({ sugar: 30 }));
+export {};
 //# sourceMappingURL=class_interfaces.js.map

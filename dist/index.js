@@ -1,5 +1,3 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 const firstVar = "Chandan";
 console.log(firstVar);
 // Function declaration (parameter type) :what kind of data you are expecting from the function
@@ -52,4 +50,5 @@ console.log(parseObjectFromJson);
 // Another example with html element
 const text = document.querySelector(".text");
 console.log(text);
+export {};
 //# sourceMappingURL=index.js.map

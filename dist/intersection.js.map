@@ -1,1 +1,1 @@
-{"version":3,"file":"intersection.js","sourceRoot":"","sources":["../src/intersection.ts"],"names":[],"mappings":";AAAA,mEAAmE;;AAenE,iFAAiF;AAEjF,MAAM,KAAK;IACT,GAAG,GAAG,CAAC,CAAC;CACT;AACD,yDAAyD"}
+{"version":3,"file":"intersection.js","sourceRoot":"","sources":["../src/intersection.ts"],"names":[],"mappings":"AAAA,mEAAmE;AAenE,iFAAiF;AAEjF,MAAM,KAAK;IACT,GAAG,GAAG,CAAC,CAAC;CACT;;AACD,yDAAyD"}

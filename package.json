@@ -4,11 +4,11 @@
   "description": "",
   "license": "ISC",
   "author": "",
-  "type": "commonjs",
+  "type": "module",
   "main": "index.js",
   "scripts": {
     "start": "npx tsc && node dist/class_interfaces.js",
-    "dev": "node dist/class_interfaces.js"
+    "dev": "npx tsc && node dist/axiosThroughFetch.js"
   },
   "devDependencies": {
     "typescript": "^5.9.3"
