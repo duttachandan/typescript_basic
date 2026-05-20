@@ -1,37 +1,39 @@
-// This is a detailed explanation about generics
+// Generics: Allow functions and types to work with any data type while maintaining type safety
+// <T> is a type parameter that acts as a placeholder for any type
 
 function genericsBasic<T>(input: T): T[] {
   return [input];
 }
 
-console.log(genericsBasic("chandan")); // here as return expect an array of String
-console.log(genericsBasic(2)); // as return expect an array of number
+console.log(genericsBasic("chandan")); // Returns: ["chandan"]
+console.log(genericsBasic(2));         // Returns: [2]
 
-// so here I have used what type to expect as input and also what type to return from the function
-// as we can see in the genericsBasic<T> function we are using <T> by mentioning this we are mentioning what
-// type you want to use you will have to use that same type as input(as parameter) in the function
-// and also you will also needs to return the array of that same type
+// The <T> parameter means: "Whatever type is passed as input will be the same type returned in an array"
+// This provides type safety without manually specifying the type each time
 
-// More Complex version of Generics
+// Advanced Generics: Using multiple type parameters for complex scenarios
 
 function genericsModerate<A, B>(value: { a: A; b: B }): { a: A; b: B }[] {
   return [value];
 }
 
-// here we have multiple values and multiple types of parameter
-// so what we have done here is A, B both are basically types and we are taking value as parameter which is
-// basically an object of a and b which follows the A and B type and also we are returning the array of that object
+// <A, B> means: Define two separate type parameters
+// The function accepts an object with properties 'a' (type A) and 'b' (type B)
+// It returns an array of objects with the same structure
 
 console.log(genericsModerate({ a: "chandan", b: 2 }));
 
-// now we will see the most used version of the generics that we will use in the framework/ library mostly
-// we will define an interface of data that we will pass as parameter in the funtion
+// Real-world Generic Interfaces: Used with APIs and libraries like Axios
+// These interfaces show how to handle responses from API calls
 
 interface AxiosType<T> {
   data: T;
 }
+
 const storeString: AxiosType<string> = { data: "I am a string" };
 const storeNumber: AxiosType<number> = { data: 20 };
+
+// Practical Example: Fetch API response structure with generic data
 
 interface fetchData<T> {
   status: number;
@@ -43,6 +45,5 @@ const res: fetchData<{ flavour: string }> = {
   data: { flavour: "choclate" },
 };
 
-
-// After learning this see the axiosThroughFetch.ts file 
+// After learning these concepts, see the axiosThroughFetch.ts file for a complete example 
 

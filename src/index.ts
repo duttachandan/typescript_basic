@@ -2,7 +2,8 @@ const firstVar: string = "Chandan";
 
 console.log(firstVar);
 
-// Function declaration (parameter type) :what kind of data you are expecting from the function
+// Function declaration: Define what data types are expected as parameters and what will be returned
+// This function accepts a number and returns a string
 
 const anyFunc = (key: number): string => {
   return `key ${key}`;
@@ -10,16 +11,17 @@ const anyFunc = (key: number): string => {
 
 console.log(anyFunc(82));
 
-// Union In Typescript
-// you will have to pass chandan/haran or moumita as parameter,
-// this function will not going to take anything else as parameter
+// Union Types in TypeScript
+// A union type allows a variable to accept one of several specific types
+// The function below will only accept the exact values: "chandan", "Haran", or "Moumita"
 
 const anyFunc2 = (key: "chandan" | "Haran" | "Moumita") => {
   console.log(key);
 };
 anyFunc2("Haran");
 
-// or you can use
+// Example using union types: accept either string or number
+// This function's parameter can be either a string or a number
 
 const sayString = (param: string | number): string => {
   return `${param}`;
@@ -28,7 +30,8 @@ const sayString = (param: string | number): string => {
 console.log(sayString(32));
 console.log(sayString("chandan"));
 
-// thpe any / unknow type(any means it will take anything as parameter)
+// The 'any' type accepts any data type (less safe, disables type checking)
+// The 'unknown' type is safer - it requires type checking before use
 
 const returnAny = (param: any): any => {
   return param;
@@ -44,43 +47,41 @@ const returnUnk = (param: unknown): unknown => {
 console.log(returnUnk(32));
 console.log(returnUnk("webskitters"));
 
-// returnUnk("chandan").toUpperCase();
-
-// so you can't use toUppercase as this is unknown,
-// whether if it was of "any" type then you can mention anything here-
-// -it will not going to throw any error over here but as we are working with the unknown type
-// so either you use this like this or like this
+// Important: You cannot call methods on 'unknown' types without type checking first
+// With 'any', TypeScript skips type checking and allows any operation (not recommended)
+// With 'unknown', TypeScript requires you to verify the type before using methods
 
 (returnUnk("chandan") as string).toUpperCase(); // used Forcefull type assertion discussed below
 
+// Type guard: Check the type at runtime before using type-specific methods
+// This ensures the operation is safe
+
 if (typeof returnAny("chandan") === "string") {
   returnAny("chandan").toUppercase;
-  // in here it will not going to throw any error here
+  // Type is verified as string before calling string methods
 }
 
-// ForceFull Type Assertion
+// Type Assertion: Tell TypeScript to treat a value as a specific type
+// Use this when you know the type better than TypeScript can infer
 
 const data: string = "432";
 
 const typeAssertion: number = (data as string).length;
 
-// Forcefully I am telling the tsc that the data is a string so show us all the methods for string
-// if we don't use forcefull Type Assertion then we will not going to get the suggestion of all the methods
-// another example
+// Type assertion (using 'as') enables TypeScript's autocomplete for string methods
 
 type book = {
   name: string;
 };
 
 const mutatingLocalstorageLike = '{"name": "chandan"}';
-// obj are saved in the localstorage as string
+// Objects stored in localStorage are always strings and must be parsed as JSON
 const parseObjectFromJson = JSON.parse(mutatingLocalstorageLike) as book;
-// here we have used forcefull assertion
+// Type assertion tells TypeScript the parsed JSON matches the 'book' type
 
 console.log(parseObjectFromJson);
 
-// Another example with html element
-
+// Example: Assert DOM elements to specific types for better type safety
 const text = document.querySelector(".text") as HTMLElement;
 
 console.log(text);

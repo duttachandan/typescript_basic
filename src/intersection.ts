@@ -1,22 +1,23 @@
-// intersection quite works like and and nor gate in the Typescript
+// Intersection Types: Combine multiple types using the '&' operator
+// This means a value must satisfy ALL the conditions of each type
 
 type Chai = { masala: number };
 type specialChai = { lemon: number };
 
 type makingChai = Chai & specialChai;
-// so here we are taking masala from chai and lemon from specialChai and
-// while makingChai both of this are important
+// makingChai must have both 'masala' from Chai AND 'lemon' from specialChai
 
 type likarChai = {
-  sugar?: number; // by defining ? we are saying you can add sugar if you w'd want if no I don't have any problem
+  sugar?: number; // Optional property - sugar can be included or omitted
   tea: number;
 };
 
+// Union Types: Use '|' to allow one type OR another (not both required)
 type hotWater = Chai | specialChai;
-// here we are saying either have masala from Chai or have lemon from specialChai
+// hotWater can have either 'masala' (from Chai) OR 'lemon' (from specialChai), not both
 
 class water implements likarChai {
   tea = 4;
 }
-// we can also use this type to implements in water class
+// The 'water' class implements likarChai, so it must include all required properties
 

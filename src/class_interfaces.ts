@@ -1,5 +1,5 @@
 interface chaiGoods {
-  sugar?: number;
+  sugar?: number; // Optional property
   tea: number;
   water: number;
 }
@@ -10,15 +10,15 @@ class lemonTea implements chaiGoods {
   sugar = 44;
 }
 
-// here we are implementing interfaces into the class means
-// we are creating a map that the class should follow and the property that the interface is having currently the class should have them too
+// Implementing an interface creates a contract: the class must include all required properties
+// If a property is optional (marked with ?), it can be omitted
 
-// we can also set readOnly values also in interfaces
+// Interfaces can enforce readonly properties - values that cannot be changed after initialization
 
 interface makeChai {
   readonly sugar: number;
   water: number;
-  tea: "3" | "4" | "5"; // this is also called as literals type
+  tea: "3" | "4" | "5"; // Literal types: only these exact values are allowed
 }
 
 class chai implements makeChai {
@@ -27,7 +27,8 @@ class chai implements makeChai {
   tea: "3" | "4" | "5" = "3";
 }
 
-// Interfaces for Functions
+// Interfaces can define function signatures
+// This ensures functions match the expected parameter and return types
 
 interface makeStudent {
   (strudentName: string, studentCourse: string): void;
@@ -37,7 +38,8 @@ const student: makeStudent = function (studentname, studentCourse) {
   console.log(studentCourse, studentname);
 };
 
-// or
+// Both arrow functions and regular functions can implement interfaces
+// Function parameters and return types are checked against the interface
 
 const student2: makeStudent = (studentname, studentCourse) => {
   return studentname;
@@ -45,7 +47,7 @@ const student2: makeStudent = (studentname, studentCourse) => {
 
 console.log(student2("chandan", "html"));
 
-// or
+// Function with explicit type annotations (alternative to using interfaces)
 
 function student3(studentName: string, coursePrice: number): number {
   return coursePrice;
@@ -53,67 +55,76 @@ function student3(studentName: string, coursePrice: number): number {
 
 console.log(student3("chandan", 6300));
 
-// union / literal types
+// Literal Types: Explicitly list the exact values that are allowed
+// More restrictive than simple string or number types
 
-const value: "chandan" | "dutta" = "chandan"; // this is literall types
-// I have literally mentioned all the types of mine that can be allowed over here
+const value: "chandan" | "dutta" = "chandan"; // Only these two values are permitted
 
-// but for union types I am declaring the type it can accept as value
+// Union Types: Allow different types but not specific values
+// More flexible than literal types
 
-let chandan: string | number; // this is union type
+let chandan: string | number; // Can be either a string OR a number
 
 chandan = 32;
 chandan = "44";
-// chandan = true;  here you will see error because the accepted type is either number or string
+// chandan = true;  // This would cause an error - boolean is not allowed
 
-// declaring array types
+// Array Type Declaration: Multiple ways to declare array types
 
 const arr: string[] = ["h", "a", "b"];
-// or
+// Alternative syntax: Array<string>
 const arr2: Array<string> = ["h", "a", "b"];
 
 const arrNum: number[] = [3, 3, 2, 0, 4, 5];
-// or
+// Alternative syntax: Array<number>
 const arrNum2: Array<number> = [3, 2, 3, 4, 5];
+
+// Tuples: Fixed-length arrays where each position has a specific type
+// Position 1 is string, position 2 is number, position 3 is number, position 4 is string
 
 const tupple: [string, number, number, string] = ["chandan", 3, 4, "chandan"];
 
-const tuppleNum: [string, number, ...number[]] = ["3", 3, 3, 3, 4, 4, 5]; // this rest tupples in here
+// Tuples with rest elements: Fixed positions followed by variable-length same type
+// First element is string, second is number, then any number of additional numbers
+
+const tuppleNum: [string, number, ...number[]] = ["3", 3, 3, 3, 4, 4, 5];
+
+// Enums: Restrict variables to a specific set of named constants
+// Useful for representing states like size, status, or priority
 
 enum chaiOrCode {
-  SMALL = 101, // this value assignation is not mandatory but if would do the next enum property will increase the value by default
-  LARGE, // after increase the value will be set to LARGE = 102, EXTRALARGE = 103
-  EXTRALARGE,
+  SMALL = 101, // Optional: assign specific values (next value increments automatically)
+  LARGE,       // Automatically set to 102
+  EXTRALARGE,  // Automatically set to 103
 }
 
-// enum is basically stricting the user, here by declaring a enum I have simply said if you'd want to use this enum
-// then you will have to select between this values only
-// values are put in Capital Letter as this is the best practice
+// Enums enforce type safety by limiting values to predefined options
+// Always use UPPERCASE for enum values (TypeScript convention)
 
 const cupSize = chaiOrCode.EXTRALARGE;
 
 console.log(cupSize);
 
-//Generic Types
+// Generic Types: Allow functions/types to work with any data type while maintaining type safety
 
 function sayTupple<T>(value: T[]): T | undefined {
   return value[0];
 }
 
-// or
+// Alternative syntax using arrow function
+// <T> is a type parameter that gets replaced with the actual type when called
 
 const sayTupple2 = <T>(value: T[]): T | undefined => {
   return value[0];
 };
 
 console.log(sayTupple2<number>([3, 2, 3]));
+// The generic T is replaced with 'number' - function accepts number[] and returns a number
 
-// Here I am mentioning the value that the function should accept
-// also return the same value this are helpfull for reusable component in react js
+// Generic types are essential for reusable components in React and other frameworks
 
-// here I am making a type from which we are using partial as generics
-// so what will happen when we will call that function that function requires any of those water/coffe
-// from that makeCoffe type benifits of using partial
+// Partial<T> Generic Utility: Makes all properties optional
+// Useful when you want to allow partial updates
 
 type makeCoffe = {
   water: string;
@@ -127,13 +138,13 @@ const mochaCofee = (update: Partial<makeCoffe>) => {
 console.log(mochaCofee({ water: "32ml" }));
 console.log(mochaCofee({ coffe: "32ml", water: "40ml" }));
 
-// here I am using Required as generics so this will make all the property in type as required whether you have declared them as
-// optional in type declaration
+// Required<T> Generic Utility: Makes all properties required
+// Converts optional properties to required ones
 
 type coffeBasic = {
-  coffee?: string; // by putting that ? we are making it optional
-  water?: string;
-  sugar?: number;
+  coffee?: string;  // Optional property
+  water?: string;   // Optional property
+  sugar?: number;   // Optional property
 };
 
 const CofeeMacroni = (update: Required<coffeBasic>) => {
@@ -141,12 +152,13 @@ const CofeeMacroni = (update: Required<coffeBasic>) => {
 };
 
 console.log(CofeeMacroni({ coffee: "32gm", water: "100ml", sugar: 20 }));
-// here I have mentioned eveything in this
+// All properties must be provided when using Required<>
 
-// there is other two ways to declare generics pick/omit
+// Pick<T, Keys> Generic Utility: Select specific properties from a type
+// Useful when you only need certain properties
 
 type coffeNew = Pick<coffeBasic, "coffee" | "water">;
-// so here I am picking from anther type coffeBasic and also I have mentioned which properties we wants to pick in here
+// Only 'coffee' and 'water' are included; 'sugar' is excluded
 
 const makeNewCoffee = (value: coffeNew) => {
   return value;
@@ -154,13 +166,12 @@ const makeNewCoffee = (value: coffeNew) => {
 
 console.log(makeNewCoffee({ coffee: "40gm", water: "300ml" }));
 
-// now we will use omit by omit we will declare which are those properties that we don't want to
-// inherit from an existing type
+// Omit<T, Keys> Generic Utility: Exclude specific properties from a type
+// Useful when you want all properties except a few
 
 type coffeeOld = Omit<coffeBasic, "water" | "coffee">;
-
-// here I have said we are not going use water and coffee from coffeBasic so the coffeOld takes only one value
-// which is sugar
+// All properties from coffeBasic are included except 'water' and 'coffee'
+// Only 'sugar' remains in coffeeOld
 
 const makeOldCoffee = (value: coffeeOld) => {
   return value;
